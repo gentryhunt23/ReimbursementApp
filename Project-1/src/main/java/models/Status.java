@@ -19,20 +19,30 @@ public class Status {
 
 		@Id
 		@Column(name = "reim_id")
-		@GeneratedValue(strategy = GenerationType.AUTO)
 		private int reimId;
 
 		@Column(name = "status", nullable = false)
 		private String status;
-		
-		@OneToMany(mappedBy="status", fetch=FetchType.LAZY)
-		private List<Status> statList = new ArrayList<Status>();
-
-		public Status(){
-			
+				
+		public Status() {
+		}
+		public Status(String status) {
+			this.status = status;
 		}
 		public Status(int reimId, String status) {
 			this.reimId = reimId;
+			this.status = status;
+		}
+		public int getReimId() {
+			return reimId;
+		}
+		public void setReimId(int reimId) {
+			this.reimId = reimId;
+		}
+		public String getStatus() {
+			return status;
+		}
+		public void setStatus(String status) {
 			this.status = status;
 		}
 

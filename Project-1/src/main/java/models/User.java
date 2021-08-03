@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,6 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.SQLQuery;
+
+import util.HibernateUtil;
 
 	@Entity
 	@Table(name="users")
@@ -36,46 +41,79 @@ import javax.persistence.Table;
 		
 		@Column(name="password", unique=true, nullable=false)
 		private String password;
-		
-		@Column(name="role", unique=true, nullable=true)
-		private String role;
+
 		
 		@Column(name="email", unique=true, nullable=false)
 		private String email;
 		
 		
 		//We will also include some multiplicity annotations in a bit
-		@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-		private List<Reimbursement> reimbursement;
+		@OneToMany(mappedBy = "rResolver", fetch = FetchType.LAZY)
+		private List<Reimbursement> resolverList = new ArrayList<Reimbursement>();
 		
-		@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-		@JoinColumn(name="role")
-		private UserRole userRole;
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name = "uRole_FK")
+		private UserRole uRole;
+		
+		@OneToMany(mappedBy = "rAuthor", fetch = FetchType.LAZY)
+		private List<Reimbursement> authorList = new ArrayList<Reimbursement>();
+			
 		
 		public User() {}
+		public User(String firstName, String lastName, String password, String email, int role_id){
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
+			this.password = password;
+			this.email = email;
+			this.uRole = retrieveRole(role_id);
+			
+		}
 		
-		public User(int userId, String firstName, String lastName, String password, String email){
+		private UserRole retrieveRole(int role_id) {
+			String sql = "SELECT * FROM user_role WHERE role_id = :id";
+			SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+			query.addEntity(UserRole.class);
+			query.setParameter("id", role_id);
+			List results = query.list();
+			return (UserRole)results.get(0);
+		}
+		public User(int userId, String firstName, String lastName, String password, String email, UserRole uRole){
 			this.userId = userId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			//this.role = UserRole;
+			this.uRole = uRole;
 			
 		}
-		public User(int userId, String firstName, String lastName, String password, String email, UserRole userRole, List<Reimbursement> reimbList) {
+		public User(int userId, String firstName, String lastName, String password, String email, UserRole uRole, List<Reimbursement> resolverList, List<Reimbursement> authorList) {
 			this.userId = userId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			//this.role = userRole;
-			//this.reimbList = reimbList;
+			this.uRole = uRole;
+			this.resolverList = resolverList;
+			this.authorList = authorList;
+
 			
 		}
-		public User(int userId, String firstName, String lastName, String username, String password, String email, UserRole userRole) {
+		public List<Reimbursement> getResolverList() {
+			return resolverList;
+		}
+		public void setResolverList(List<Reimbursement> resolverList) {
+			this.resolverList = resolverList;
+		}
+		public List<Reimbursement> getAuthorList() {
+			return authorList;
+		}
+		public void setAuthorList(List<Reimbursement> authorList) {
+			this.authorList = authorList;
+		}
+		public User(int userId, String firstName, String lastName, String username, String password, String email, UserRole uRole) {
 			
 			this.userId = userId;
 			this.firstName = firstName;
@@ -83,7 +121,7 @@ import javax.persistence.Table;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			//this.role = userRole;
+			this.uRole = uRole;
 		}
 		public String getUsername() {
 			return username;
@@ -97,12 +135,7 @@ import javax.persistence.Table;
 		public void setPassword(String password) {
 			this.password = password;
 		}
-		public String getRole() {
-			return role;
-		}
-		public void setRole(String role) {
-			this.role = role;
-		}
+		
 		public int getUserId() {
 			return userId;
 		}
@@ -134,12 +167,24 @@ import javax.persistence.Table;
 		public void setEmail(String email) {
 			this.email = email;
 		}
+
+		
+
+		public UserRole getuRole() {
+			return uRole;
+		}
+
+		public void setuRole(UserRole uRole) {
+			this.uRole = uRole;
+		}
+		
 		
 		@Override
 		public String toString() {
 			return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-					+ username + ", password=" + password + ", role=" + role + ", email=" + email + "]";
+					+ username + ", password=" + password + ", email=" + email + ", resolverList=" + resolverList
+					+ ", uRole=" + uRole + ", authorList=" + authorList + "]";
+		}
 
-}
 	}
 

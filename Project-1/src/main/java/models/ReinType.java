@@ -24,18 +24,20 @@ public class ReinType {
 	@Column(name="type", unique=true, nullable=false)
 	private String type;
 	
-	@OneToMany(mappedBy="type", fetch=FetchType.LAZY)
-	private List<ReinType> rtList = new ArrayList<>();
+//	@OneToMany(mappedBy="rType", fetch=FetchType.LAZY)------> Ask Ethan why?
+//	private List<Reimbursement> reimList = new ArrayList<>();
+//	
+//	public List<Reimbursement> getRtList() {
+//		return reimList;
+//	}
+//	public void setRtList(List<Reimbursement> reimList) {
+//		this.reimList = reimList;
+//	}
 	
-	public List<ReinType> getRtList() {
-		return rtList;
-	}
-	public void setRtList(List<ReinType> rtList) {
-		this.rtList = rtList;
-	}
 	public ReinType(){
-		
+	
 	}
+
 	public ReinType(int reimId, String type){
 		this.reimId = reimId;
 		this.type = type;
@@ -60,3 +62,4 @@ public class ReinType {
 	
 	
 }
+//do you need this class?

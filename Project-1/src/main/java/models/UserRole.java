@@ -11,25 +11,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.SQLQuery;
+
+import util.HibernateUtil;
 @Entity
 @Table(name = "user_role")
 public class UserRole {
 
 		@Id
 		@Column(name = "role_id")
-		@GeneratedValue(strategy = GenerationType.AUTO)
+		//@GeneratedValue(strategy = GenerationType.AUTO)
 		private int userId;
 
 		@Column(name = "user_role", nullable = false)
 		private String userRole;
 
-		@OneToMany(mappedBy="userRole", fetch=FetchType.LAZY)
+		@OneToMany(mappedBy="uRole", fetch=FetchType.LAZY)
 		private List<User> uList = new ArrayList<User>();
 		
 		public UserRole() {
 
 		}
-
 		public UserRole(int userId, String userRole) {
 			this.userId = userId;
 			this.userRole = userRole;
