@@ -8,8 +8,6 @@ import models.Reimbursement;
 public class ReimbursementService {
 	ReimbursementDao rd = new ReimbursementDao();
 	
-	
-	
 	public List<Reimbursement> viewPending() {
 		return rd.selectPending();
 		
@@ -20,7 +18,10 @@ public class ReimbursementService {
 		rd.updateReim(selected);
 	
 	}
-
+	public List<Reimbursement> selectResolved() {
+		return rd.selectResolved();
+		
+	}
 	
 
 }

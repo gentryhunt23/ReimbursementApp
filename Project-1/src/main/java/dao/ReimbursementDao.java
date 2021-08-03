@@ -50,7 +50,7 @@ public ReimbursementDao() {
 		query.setParameter("status", new Status(1, "PENDING"));
 		return query.list();
 	}
-	public List<Reimbursement> selectNotPending(){
+	public List<Reimbursement> selectResolved(){
 		Session ses = HibernateUtil.getSession();
 		String sql = "SELECT * FROM reimburesment WHERE status NOT =:status";
 		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
