@@ -19,9 +19,13 @@ import javax.persistence.Table;
 
 import org.hibernate.SQLQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import util.HibernateUtil;
 
 	@Entity
+	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 	@Table(name="users")
 	public class User {
 
@@ -48,6 +52,7 @@ import util.HibernateUtil;
 		
 		
 		//We will also include some multiplicity annotations in a bit
+		@JsonIgnore
 		@OneToMany(mappedBy = "rResolver", fetch = FetchType.LAZY)
 		private List<Reimbursement> resolverList = new ArrayList<Reimbursement>();
 		
@@ -55,6 +60,7 @@ import util.HibernateUtil;
 		@JoinColumn(name = "uRole_FK")
 		private UserRole uRole;
 		
+		@JsonIgnore
 		@OneToMany(mappedBy = "rAuthor", fetch = FetchType.LAZY)
 		private List<Reimbursement> authorList = new ArrayList<Reimbursement>();
 			
@@ -78,24 +84,24 @@ import util.HibernateUtil;
 			List results = query.list();
 			return (UserRole)results.get(0);
 		}
-		public User(int userId, String firstName, String lastName, String password, String email, UserRole uRole){
+		public User(int userId, String firstName, String lastName, String password, String email, int role_id){
 			this.userId = userId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			this.uRole = uRole;
+			this.uRole = retrieveRole(role_id);
 			
 		}
-		public User(int userId, String firstName, String lastName, String password, String email, UserRole uRole, List<Reimbursement> resolverList, List<Reimbursement> authorList) {
+		public User(int userId, String firstName, String lastName, String password, String email, int role_id, List<Reimbursement> resolverList, List<Reimbursement> authorList) {
 			this.userId = userId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			this.uRole = uRole;
+			this.uRole = retrieveRole(role_id);
 			this.resolverList = resolverList;
 			this.authorList = authorList;
 
@@ -113,7 +119,7 @@ import util.HibernateUtil;
 		public void setAuthorList(List<Reimbursement> authorList) {
 			this.authorList = authorList;
 		}
-		public User(int userId, String firstName, String lastName, String username, String password, String email, UserRole uRole) {
+		public User(int userId, String firstName, String lastName, String username, String password, String email, int role_id) {
 			
 			this.userId = userId;
 			this.firstName = firstName;
@@ -121,7 +127,7 @@ import util.HibernateUtil;
 			this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 			this.password = password;
 			this.email = email;
-			this.uRole = uRole;
+			this.uRole = retrieveRole(role_id);
 		}
 		public String getUsername() {
 			return username;

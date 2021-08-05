@@ -15,9 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.SQLQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import util.HibernateUtil;
 
 @Entity
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Table(name = "reimburesment")
 public class Reimbursement {
 
@@ -73,7 +76,7 @@ public class Reimbursement {
 		this.amount = amount;
 		this.description = description;
 		this.rType = retrieveType(id);
-		this.rStatus = retrieveStatus(2);
+		this.rStatus = retrieveStatus(1);
 		this.rAuthor = user;
 
 

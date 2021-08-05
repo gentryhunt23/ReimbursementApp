@@ -12,14 +12,8 @@ public class ReimbursementService {
 		return rd.selectPending();
 		
 	}
-	public void updateStatus(int id, int statusId) {
-		Reimbursement selected = rd.selectById(id);
-		selected.updateRetrievedStatus(statusId);
-		rd.updateReim(selected);
-	
-	}
-	public List<Reimbursement> selectResolved() {
-		return rd.selectResolved();
+	public List<Reimbursement> viewResolved() {
+		return rd.viewResolved();
 		
 	}
 	

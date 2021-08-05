@@ -14,8 +14,12 @@ import javax.persistence.Table;
 
 import org.hibernate.SQLQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import util.HibernateUtil;
 @Entity
+@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
 @Table(name = "user_role")
 public class UserRole {
 
@@ -26,7 +30,8 @@ public class UserRole {
 
 		@Column(name = "user_role", nullable = false)
 		private String userRole;
-
+		
+		@JsonIgnore
 		@OneToMany(mappedBy="uRole", fetch=FetchType.LAZY)
 		private List<User> uList = new ArrayList<User>();
 		

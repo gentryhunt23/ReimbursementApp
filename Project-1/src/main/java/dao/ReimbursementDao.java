@@ -24,13 +24,6 @@ public ReimbursementDao() {
 		tx.commit();
 	}
 	
-	public void updateReim(Reimbursement reimbursement) {
-		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.beginTransaction();
-		ses.update(reimbursement);
-		tx.commit();
-	}
-	
 	public Reimbursement selectById(int id) {
 		Session ses = HibernateUtil.getSession();
 		Reimbursement r = ses.get(Reimbursement.class, id);
@@ -50,13 +43,27 @@ public ReimbursementDao() {
 		query.setParameter("status", new Status(1, "PENDING"));
 		return query.list();
 	}
-	public List<Reimbursement> selectResolved(){
+	public List<Reimbursement> viewResolved(){
 		Session ses = HibernateUtil.getSession();
 		String sql = "SELECT * FROM reimburesment WHERE status NOT =:status";
 		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
 		query.addEntity(Reimbursement.class);
 		query.setParameter("status", new Status(1, "PENDING"));
 		return query.list();
+	}
+	public void updateReim(Reimbursement reimbursement) {
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.update(reimbursement);
+		tx.commit();
+	}
+	
+	//moved from services
+	public void updateStatus(int id, int statusId) {
+		Reimbursement selected = selectById(id);
+		selected.updateRetrievedStatus(statusId);
+		updateReim(selected);
+	
 	}
 	
 	

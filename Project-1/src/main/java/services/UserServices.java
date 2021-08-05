@@ -5,6 +5,12 @@ import dao.UserDao;
 
 public class UserServices {
 	UserDao uDao = new UserDao();
+	
+	public UserServices() {};
+
+	public UserServices(UserDao uDao) {
+		this.uDao = uDao;
+	}
 	public User login(String username, String password) {
 		return uDao.getUser(username, password);
 	}
