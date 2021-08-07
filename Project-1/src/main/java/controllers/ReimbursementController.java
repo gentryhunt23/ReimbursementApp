@@ -38,6 +38,7 @@ public class ReimbursementController {
 		}
 		else {
 			//To read in stringified JSON data is a bit more complicated,
+			//front end data conversion to readable string
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			
@@ -53,7 +54,7 @@ public class ReimbursementController {
 			
 			int userId = Integer.parseInt(parsedObj.get("userId").asText());
 			int amount = Integer.parseInt(parsedObj.get("amount").asText());
-			String description = parsedObj.get("authorList").get("description").asText();
+			String description = parsedObj.get("description").asText();
 			int roleId = Integer.parseInt(parsedObj.get("roleId").asText());
 
 			User u = uDao.selectById(userId);
