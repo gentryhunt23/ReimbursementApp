@@ -1,5 +1,7 @@
 package driver;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import dao.ReimbursementDao;
@@ -20,11 +22,11 @@ public class ReimbursementDriver {
 		ReimbursementDao rDao = new ReimbursementDao();
 		//ReimbursementService rs = new ReimbursementService();
 
-		//rDao.updateStatus(26, 3);
 
-//		UserServices us = new UserServices();
-//		curUser = us.login("GentryHunt4427", "password");
-//		curUser = us.signUp("Gentry", "Hunt", "password", "ghunt@csu.edu", 2);
+		UserServices us = new UserServices();
+		curUser = us.login("GentryHunt3064", "password");
+		//curUser = us.signUp("Gentry", "Hunt", "password1", "ghunt@csu.edu2", 1);
+		rDao.updateStatus(63, 2, curUser);
 
 		// amount, description, type, user
 		//Reimbursement r = new Reimbursement(1000, "Description2", 2, curUser);
@@ -36,9 +38,6 @@ public class ReimbursementDriver {
 //			System.out.println(x.toString());
 //			;
 		}
-//		 create new type
-
-//		create new status
 
 	}
 

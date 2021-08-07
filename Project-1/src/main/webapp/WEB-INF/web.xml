@@ -33,6 +33,27 @@
 		<servlet-name>MainViewServlet</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>MainViewServlet</servlet-name>
+		<servlet-class>servlets.MainViewServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MainViewServlet</servlet-name>
+		<url-pattern>/manager</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MainViewServlet</servlet-name>
+		<servlet-class>servlets.MainViewServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MainViewServlet</servlet-name>
+		<url-pattern>/employee</url-pattern>
+	</servlet-mapping>
+	
 	
 
 </web-app>

@@ -44,7 +44,7 @@ public class UserRole {
 
 		}
 
-		public int getUserId() {
+		public int getUserRoleId() {
 			return userId;
 		}
 

@@ -24,7 +24,7 @@ public class ReinType {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reimId;
 	
-	@Column(name="type", unique=true, nullable=false)
+	@Column(name="type", nullable=false)
 	private String type;
 	
 //	@OneToMany(mappedBy="rType", fetch=FetchType.LAZY)------> Ask Ethan why?

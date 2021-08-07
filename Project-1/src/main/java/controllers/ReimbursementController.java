@@ -52,10 +52,14 @@ public class ReimbursementController {
 			JsonNode parsedObj = mapper.readTree(data);
 			
 			int userId = Integer.parseInt(parsedObj.get("userId").asText());
-			//int wallId = Integer.parseInt(parsedObj.get("wallId").asText());
-			String content = parsedObj.get("content").asText();
+			int amount = Integer.parseInt(parsedObj.get("amount").asText());
+			String description = parsedObj.get("authorList").get("description").asText();
+			int roleId = Integer.parseInt(parsedObj.get("roleId").asText());
+
 			User u = uDao.selectById(userId);
 			//pServ.addPost(u, content);
+			Reimbursement r = new Reimbursement(amount, description, roleId, u);
+			rDao.createReim(r);
 			
 			ObjectNode ret = mapper.createObjectNode();
 			ret.put("message", "successfully submitted a new reimbursment");

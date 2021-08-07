@@ -43,7 +43,7 @@ import util.HibernateUtil;
 		@Column(name="username", unique=true, nullable=false)
 		private String username;
 		
-		@Column(name="password", unique=true, nullable=false)
+		@Column(name="password", nullable=false)
 		private String password;
 
 		
@@ -189,7 +189,7 @@ import util.HibernateUtil;
 		public String toString() {
 			return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
 					+ username + ", password=" + password + ", email=" + email + ", resolverList=" + resolverList
-					+ ", uRole=" + uRole + ", authorList=" + authorList + "]";
+					+ ", uRole=" + uRole.getUserRoleId() + ", authorList=" + authorList + "]";
 		}
 
 	}

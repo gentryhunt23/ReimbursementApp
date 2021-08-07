@@ -13,7 +13,7 @@ public class ReimbursementService {
 		
 	}
 	public List<Reimbursement> viewResolved() {
-		return rd.viewResolved();
+		return rd.selectResolved();
 		
 	}
 	

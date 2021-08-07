@@ -13,8 +13,13 @@ public class LoginViewHelper {
 		switch(req.getRequestURI()) {
 		case "/Project-1/login":
 			return LoginViewController.fetchLoginPage(req);
-			default:
-				return "/Project-1/login";
+		case "/Project-1/manager" :
+			return LoginViewController.fetchManagerPage(req);
+		case "/Project-1/employee" :
+			return LoginViewController.fetchEmployeePage(req);
+			default : System.out.println("something is broken");
+			return "This is the switchs case return statement in the view helper";
+				
 		}
 	}
 	}

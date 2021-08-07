@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reimbursement App Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to the Reimbursement Application</h1>
+    <p class="lead">Employee Page</p>
+    <p class="lead">
+      <a id="viewReimbursements" class="btn btn-primary btn-lg" href="#" role="button">View Reimbursement Requests</a>
+      <br>
+      <hr>
+
+    <div>
+      <h3>Create A New Reimbursement Request</h3>
+      <input name="employeeId" class="form-control" id="employeeId" placeholder="Enter Your Employee ID Number">
+      <input name="amount" class="form-control" id="amountInput" placeholder="Amount">
+      <input name="description" class="form-control" id="descriptionInput" placeholder="Description">
+      <br>
+
+      <input required name="type" type="radio" aria-label="Checkbox for following text input" value="1"
+        class="radio-group" id="travel">
+      <label class="form-check-label" for="defaultCheck1">TRAVEL</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="2" class="radio-group"
+        id="food">
+      <label class="form-check-label" for="defaultCheck1">FOOD</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="3" class="radio-group"
+        id="lodging">
+      <label class="form-check-label" for="defaultCheck1">LODGING</label><br>
+      <input name="type" type="radio" aria-label="Checkbox for following text input" value="4" class="radio-group"
+        id="other">
+      <label class="form-check-label" for="defaultCheck1">OTHER</label><br>
+    </div>
+    <br>
+    <br>
+
+    <a id="createReimbursements" class="btn btn-primary btn-lg" href="#" role="button">Submit Reimbursement Requests</a>
+
+    </p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+  <script src="resources/js/employee.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import util.HibernateUtil;
 
 @Entity
-@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 @Table(name = "reimburesment")
 public class Reimbursement {
 
@@ -32,32 +34,34 @@ public class Reimbursement {
 	@Column(name = "reimbursement_amount", nullable = false)
 	private int amount;
 
-	@Column(name = "reimbursement_submitted", nullable = true)
-	private String submitted;
+	@Column(name = "reimbursement_submitted", nullable = false)
+	private Timestamp submitted;
 
 	@Column(name = "reimbursement_resolved", nullable = true)
-	private String resolved;
+	private Timestamp resolved;
 
 	@Column(name = "reimbursement_description", nullable = false)
 	private String description;
 
-	 @ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reim_author")
 	private User rAuthor;
 
-	 @ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reim_resolver")
 	private User rResolver;
 
-	 @ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "type")
 	private ReinType rType;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "status")
 	private Status rStatus;
-	public Reimbursement() {}
-	
+
+	public Reimbursement() {
+	}
+
 	public Reimbursement(int reimId) {
 		this.reimId = reimId;
 
@@ -69,29 +73,34 @@ public class Reimbursement {
 		this.rType = retrieveType(id);
 		this.rStatus = retrieveStatus(1);
 
-
 	}
-	
+//Main Constructor
 	public Reimbursement(int amount, String description, int id, User user) {
+		Date date = new Date();
+		Timestamp submitted = new Timestamp(date.getTime());
 		this.amount = amount;
 		this.description = description;
 		this.rType = retrieveType(id);
 		this.rStatus = retrieveStatus(1);
 		this.rAuthor = user;
-
+		this.submitted = submitted;
 
 	}
-	
+
 	private Status retrieveStatus(int id) {
 		String sql = "SELECT * FROM status WHERE reim_id = :id";
 		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
 		query.addEntity(Status.class);
 		query.setParameter("id", id);
 		List results = query.list();
-		return (Status)results.get(0);
-		
+		return (Status) results.get(0);
+
 	}
-	
+
+	public void updateRetrievedStatus(int statusId) {
+		this.rStatus = retrieveStatus(statusId);
+
+	}
 
 	private ReinType retrieveType(int id) {
 		String sql = "SELECT * FROM type WHERE reim_id = :id";
@@ -99,17 +108,17 @@ public class Reimbursement {
 		query.addEntity(ReinType.class);
 		query.setParameter("id", id);
 		List results = query.list();
-		return (ReinType)results.get(0);
+		return (ReinType) results.get(0);
 	}
 
-	public Reimbursement(int reimId, int amount, String resolved) {
+	public Reimbursement(int reimId, int amount, Timestamp resolved) {
 		this.reimId = reimId;
 		this.amount = amount;
 		this.resolved = resolved;
 
 	}
 
-	public Reimbursement(int reimId, int amount, String resolved, String description) {
+	public Reimbursement(int reimId, int amount, Timestamp resolved, String description) {
 		this.reimId = reimId;
 		this.amount = amount;
 		this.resolved = resolved;
@@ -117,7 +126,7 @@ public class Reimbursement {
 
 	}
 
-	public Reimbursement(int reimId, int amount, String resolved, String description, Status rStatus) {
+	public Reimbursement(int reimId, int amount, Timestamp resolved, String description, Status rStatus) {
 		this.reimId = reimId;
 		this.amount = amount;
 		this.resolved = resolved;
@@ -126,7 +135,7 @@ public class Reimbursement {
 
 	}
 
-	public Reimbursement(int reimId, int amount, String resolved, String description, Status rStatus, ReinType rType) {
+	public Reimbursement(int reimId, int amount, Timestamp resolved, String description, Status rStatus, ReinType rType) {
 		this.reimId = reimId;
 		this.amount = amount;
 		this.resolved = resolved;
@@ -184,19 +193,19 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public String getSubmitted() {
+	public Timestamp getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(String submitted) {
+	public void setSubmitted(Timestamp submitted) {
 		this.submitted = submitted;
 	}
 
-	public String getResolved() {
+	public Timestamp getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(String resolved) {
+	public void setResolved(Timestamp resolved) {
 		this.resolved = resolved;
 	}
 
@@ -211,13 +220,8 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [reimId=" + reimId + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
-				+ resolved + ", description=" + description + ", rAuthor=" + rAuthor.getFirstName() + ", rResolver=" + ""
-				+ ", rType=" + rType.getType() + ", rStatus=" + rStatus.getStatus() + "]";
-	}
-
-	public void updateRetrievedStatus(int statusId) {
-		this.rStatus = retrieveStatus(statusId);
-		
+				+ resolved + ", description=" + description + ", rAuthor=" + rAuthor.getFirstName() + ", rResolver="
+				+ "" + ", rType=" + rType.getType() + ", rStatus=" + rStatus.getStatus() + "]";
 	}
 
 }

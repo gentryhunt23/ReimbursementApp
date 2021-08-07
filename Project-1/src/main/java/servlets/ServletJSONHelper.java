@@ -16,18 +16,17 @@ public class ServletJSONHelper {
 	public static void process(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
 		System.out.println("In the ServletJSONHelper with URI: " + req.getRequestURI());
 		switch(req.getRequestURI()) {
-//			case "/Project-1":
-//				LoginViewController.fetchLoginPage(req, res);
-//				break;
+		
 			case "/Project-1/api/login":
 				LoginController.login(req, res);
 				break;
-//			case "/SocialHubWeek4/api/posts":
-//				PostsController.handlePosts(req, res);
-//				break;
-//			case "/SocialHubWeek4/api/session":
-//				SessionController.getSession(req, res);
-//				break;
+			case "/Project-1/api/manager/view-reimbursements":
+			ReimbursementController.handleReibursements(req, res);
+			break;
+			case "/Project-1/api/employee/create":
+				ReimbursementController.handleReibursements(req, res);
+				//SessionController.getSession(req, res);
+				break;
 		}
 	}
 }

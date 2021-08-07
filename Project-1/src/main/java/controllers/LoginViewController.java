@@ -16,7 +16,19 @@ public class LoginViewController {
 	public static String fetchLoginPage(HttpServletRequest req) throws ServletException, IOException {
 		System.out.println(req.getContentType());
 		System.out.println("This should return the view login.html");
-		return "resources/index.html";
+		return "resources/html/index.html";
+		
+	}
+	public static String fetchManagerPage(HttpServletRequest req) throws ServletException, IOException {
+		System.out.println(req.getContentType());
+		System.out.println("This should return the view manager.html");
+		return "resources/html/manager.html";
+		
+	}
+	public static String fetchEmployeePage(HttpServletRequest req) throws ServletException, IOException {
+		System.out.println(req.getContentType());
+		System.out.println("This should return the view employee.html");
+		return "resources/html/employee.html";
 		
 	}
 	

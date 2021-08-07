@@ -45,8 +45,8 @@ public class LoginController {
 			User u = uServ.login(username, password);
 
 			int id = u.getUserId();
-			int role = u.getuRole().getUserId();
-			System.out.println(role);
+			int role = u.getuRole().getUserRoleId();
+			System.out.println("This is the user role " + role);
 
 			System.out.println(u);
 			// We will keep track of if the user is logged in by storing their id in the
@@ -57,10 +57,14 @@ public class LoginController {
 			res.addHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("Access-Control-Allow-Methods", "POST");
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
-			ObjectNode user = mapper.createObjectNode();
-			user.put("userId", id);
-			user.put("userRole", role);
-			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
+			
+			//if receive an infinite loop error---Stack Overflow Error (Jackson)
+			
+//			ObjectNode user = mapper.createObjectNode();
+//			user.put("userId", id);
+//			user.put("userRole", role);
+//			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(HttpServletResponse.SC_FORBIDDEN);

@@ -1,12 +1,8 @@
 $(document).ready(function () {
-    // $('#loginButton').click(function () {
-    //     alert("Working")
-    //     login();
 
+    // $('#signupButton').click(function () {
+    //     alert('sign-up button')
     // })
-    $('#signupButton').click(function () {
-        alert('sign-up button')
-    })
 
     const login = async () => {
         let uname = $('#usernameInput').val();
@@ -30,7 +26,7 @@ $(document).ready(function () {
         let req = await fetch('http://localhost:8080/Project-1/api/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(uObj),
         });
@@ -40,14 +36,15 @@ $(document).ready(function () {
         }
         else {
             let res = await req.json();
-            location.href = 'https://www.google.com/';
+            //location.href = 'https://www.google.com/';
 
-            // if (res.userRole == 1) {
+            if (res.userRole === 2) {
+                alert("HERE");
 
-            //     location.href = './employee.html';
-            // } else {
-            //     location.href = './manager.html';
-            // }
+                location.href = 'resources/employee.html';
+            } else {
+                location.href = 'resources/manager';
+            }
         }
     }
     //Setting the event listener for the login button
