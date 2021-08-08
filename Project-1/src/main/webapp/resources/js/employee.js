@@ -43,14 +43,44 @@ const createReim = async () => {
     else {
         let res = await req.json();
         console.log(res)
-       
+        // if (res.userRole === 1) {
+        //     alert("HERE");
+
+        //     location.href = 'resources/employee';
+        // } else {
+        //     location.href = 'resources/manager';
+        // }
     }
 }
 
 //========================================================================================================================
 
 
+const viewReim = async () => {
+    let res = await fetch('http://localhost:8080/Project-1/api/employee/view-reimbursements', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    let data = await res.json();
+    console.log(data);
+    for( i = 0; i < data.length; i++){
+        //console.log(data[i]);
+        console.log(data[i].amount);
+        console.log(data[i].reimId);
+        console.log(data[i].username);
+        console.log(data[i].rType.type);
+        console.log(data[i].rStatus.status);
+        console.log(data[i].description);
 
+    }
+
+}
+//Setting the event listener for the login button
+
+document.getElementById('createReimbursements').addEventListener('click', createReim);
+document.getElementById('viewReimbursements').addEventListener('click', viewReim);
 
     // Setting the event listener for the register redirect button
     //document.getElementById('register-redir').addEventListener('click', (event) => {

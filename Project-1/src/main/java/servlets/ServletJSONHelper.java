@@ -27,6 +27,10 @@ public class ServletJSONHelper {
 				ReimbursementController.handleReimbursements(req, res);
 				//SessionController.getSession(req, res);
 				break;
+			case "/Project-1/api/employee/view-reimbursements":
+				ReimbursementController.handleReimbursements(req, res);
+				//SessionController.getSession(req, res);
+				break;
 		}
 	}
 }
