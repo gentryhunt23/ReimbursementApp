@@ -20,7 +20,7 @@ public class ServletJSONHelper {
 			case "/Project-1/api/login":
 				LoginController.login(req, res);
 				break;
-			case "/Project-1/api/employee/view-reimbursements":
+			case "/Project-1/api/manager/view-reimbursements":
 			ReimbursementController.handleReimbursements(req, res);
 			break;
 			case "/Project-1/api/employee/create":
