@@ -112,8 +112,20 @@ public class ReimbursementController {
 			//res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
 			res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
 			
-			
-
 		}
+	
+	
+	public static void viewResolved(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		if(req.getMethod().equals("GET")) {
+			System.out.println("in the view resolved reimbursements method");
+			
+			List<Reimbursement> resolvedRemibs = rDao.selectResolved();
+			System.out.println(resolvedRemibs);
+			res.addHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("Access-Control-Allow-Methods", "GET");
+			res.getWriter().write(new ObjectMapper().writeValueAsString(resolvedRemibs));
+			
+		}
+	}
 		
 }

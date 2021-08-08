@@ -19,8 +19,9 @@ const viewPending = async () => {
     });
     let data = await res.json();
     console.log(data);
-    //=======================================================================================================================
 }
+//=======================================================================================================================
+
 const updateReimbs = async () => {
     let reimId = $('#reimId').val();
     let status = $('.radio-group').val();
@@ -29,7 +30,7 @@ const updateReimbs = async () => {
     console.log(status)
 
     $('#reimId').val("");
-   // $('.radio-group').val("");
+    // $('.radio-group').val("");
 
 
     if (reimId.length < 1) {
@@ -57,9 +58,22 @@ const updateReimbs = async () => {
 
     }
 }
+//=======================================================================================================================
+const viewResolved = async () => {
+    let res = await fetch('http://localhost:8080/Project-1/api/manager/view-resolved', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    let data = await res.json();
+    console.log(data);
+}
 //Setting the event listener for the login button
 
 document.getElementById('resolve').addEventListener('click', updateReimbs);
 document.getElementById('viewUserReimbursements').addEventListener('click', viewReim);
 document.getElementById('resolveReimbursements').addEventListener('click', viewPending);
+document.getElementById('viewResolvedReimbursements').addEventListener('click', viewResolved);
+
 
