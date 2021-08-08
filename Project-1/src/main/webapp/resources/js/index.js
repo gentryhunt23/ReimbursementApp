@@ -41,9 +41,9 @@ $(document).ready(function () {
             if (res.userRole === 2) {
                 alert("HERE");
 
-                location.href = 'resources/employee.html';
+                location.href = '/employee.html';
             } else {
-                location.href = 'resources/manager';
+                location.href = '/Project-1/manager';
             }
         }
     }

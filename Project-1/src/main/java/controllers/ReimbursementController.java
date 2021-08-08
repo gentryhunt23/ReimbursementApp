@@ -26,8 +26,9 @@ public class ReimbursementController {
 	private static ReimbursementService rServ = new ReimbursementService();
 	private static UserServices uServ = new UserServices();
 	
-	public static void handleReibursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+	public static void handleReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
 		if(req.getMethod().equals("GET")) {
+			System.out.println("in the handle reimbursements method");
 			
 			List<Reimbursement> reimbs = rDao.selectAll();
 			System.out.println(reimbs);
@@ -55,18 +56,20 @@ public class ReimbursementController {
 			int userId = Integer.parseInt(parsedObj.get("userId").asText());
 			int amount = Integer.parseInt(parsedObj.get("amount").asText());
 			String description = parsedObj.get("description").asText();
-			int roleId = Integer.parseInt(parsedObj.get("roleId").asText());
+			int typeId = Integer.parseInt(parsedObj.get("typeId").asText());
 
 			User u = uDao.selectById(userId);
 			//pServ.addPost(u, content);
-			Reimbursement r = new Reimbursement(amount, description, roleId, u);
+			Reimbursement r = new Reimbursement(amount, description, typeId, u);
 			rDao.createReim(r);
 			
 			ObjectNode ret = mapper.createObjectNode();
 			ret.put("message", "successfully submitted a new reimbursment");
 			res.addHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("Access-Control-Allow-Methods", "POST");
-			res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+			//res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+			res.getWriter().write(new ObjectMapper().writeValueAsString(r));
+
 		}
 	}
 	
