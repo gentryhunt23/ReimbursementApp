@@ -64,8 +64,8 @@ public class ReimbursementDao {
 		query.setParameter("status", new Status(1, "PENDING"));
 		return query.list();
 	}
-
-	public void updateStatus(int id, int statusId, User curUser) {
+	//                        reimbID and StatusID User curUser
+	public void updateStatus(int id, int statusId) {
 		Reimbursement selected = selectById(id);
 		Timestamp resolved = new Timestamp(date.getTime());
 		selected.updateRetrievedStatus(statusId);

@@ -65,14 +65,16 @@ const viewReim = async () => {
     });
     let data = await res.json();
     console.log(data);
-    for( i = 0; i < data.length; i++){
+    for (i = 0; i < data.length; i++) {
         //console.log(data[i]);
-        console.log(data[i].amount);
-        console.log(data[i].reimId);
-        console.log(data[i].username);
-        console.log(data[i].rType.type);
-        console.log(data[i].rStatus.status);
-        console.log(data[i].description);
+        let _amount = data[i].amount;
+        let _reimId = data[i].reimId;
+        let _username = data[i].username;
+        let _type = data[i].rType.type;
+        let _status = data[i].rStatus.status;
+        let _description = data[i].description;
+
+        
 
     }
 

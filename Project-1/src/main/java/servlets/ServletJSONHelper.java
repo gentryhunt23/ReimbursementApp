@@ -31,6 +31,14 @@ public class ServletJSONHelper {
 				ReimbursementController.handleReimbursements(req, res);
 				//SessionController.getSession(req, res);
 				break;
+			case "/Project-1/api/manager/view-pending":
+				ReimbursementController.viewPending(req, res);
+				//SessionController.getSession(req, res);
+				break;
+			case "/Project-1/api/manager/resolve":
+				ReimbursementController.updateReimb(req, res);
+				//SessionController.getSession(req, res);
+				break;
 		}
 	}
 }

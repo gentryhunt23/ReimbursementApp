@@ -36,12 +36,11 @@ $(document).ready(function () {
         }
         else {
             let res = await req.json();
-            //location.href = 'https://www.google.com/';
 
-            if (res.userRole === 2) {
+            if (res.userRole === 1) {
                 alert("HERE");
 
-                location.href = '/employee.html';
+                location.href = '/Project-1/manager';
             } else {
                 location.href = '/Project-1/manager';
             }

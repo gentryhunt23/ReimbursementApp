@@ -72,5 +72,48 @@ public class ReimbursementController {
 
 		}
 	}
-	
+	public static void viewPending(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+		if(req.getMethod().equals("GET")) {
+			System.out.println("in the pending reimbursements method");
+			
+			List<Reimbursement> pendingRemibs = rDao.selectPending();
+			System.out.println(pendingRemibs);
+			res.addHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("Access-Control-Allow-Methods", "GET");
+			res.getWriter().write(new ObjectMapper().writeValueAsString(pendingRemibs));
+			
+		}
+	}
+	public static void updateReimb(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
+			System.out.println("in the handle reimbursements method");
+			StringBuilder buffer = new StringBuilder();
+			BufferedReader reader = req.getReader();
+			
+			String line;
+			while((line = reader.readLine()) != null) {
+				buffer.append(line);
+				buffer.append(System.lineSeparator());
+			}
+			String data = buffer.toString();
+			System.out.println(data);
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode parsedObj = mapper.readTree(data);
+			
+			int reimId = Integer.parseInt(parsedObj.get("reimId").asText());
+			int status = Integer.parseInt(parsedObj.get("status").asText());
+
+			rDao.updateStatus(reimId, status);
+			
+			
+			ObjectNode ret = mapper.createObjectNode();
+			ret.put("message", "successfully resolved the existing reimbursment");
+			res.addHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("Access-Control-Allow-Methods", "POST");
+			//res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+			res.getWriter().write(new ObjectMapper().writeValueAsString(ret));
+			
+			
+
+		}
+		
 }
