@@ -31,5 +31,18 @@ public class LoginViewController {
 		return "resources/html/employee.html";
 		
 	}
+	public static String fetchUsersPage(HttpServletRequest req) throws ServletException, IOException {
+		System.out.println(req.getContentType());
+		System.out.println("This should return the view users.html");
+		return "resources/html/users.html";
+		
+	}
+	public static String fetchRegistrationPage(HttpServletRequest req) throws ServletException, IOException {
+		System.out.println(req.getContentType());
+		System.out.println("This should return the view registration.html");
+		return "resources/html/register.html";
+		
+	}
+	
 	
 }

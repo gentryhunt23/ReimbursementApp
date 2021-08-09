@@ -18,25 +18,27 @@
         <p class="lead">
             <a id="viewUserReimbursements" class="btn btn-primary btn-lg" href="#" role="button">View Reimbursement
                 Requests</a>
-            <a id="resolveReimbursements" class="btn btn-primary btn-lg" href="#" role="button">Resolve Reimbursement
+            <a id="resolveReimbursements" class="btn btn-primary btn-lg" href="#" role="button">View Pending
                 Requests</a>
             <a id="viewResolvedReimbursements" class="btn btn-primary btn-lg" href="#" role="button">View Resolved Reimbursements</a>
-        <div class="alert alert-warning" role="alert">
-            Reimbursements Placeholder </div>
+            <a id="viewUsers" class="btn btn-primary btn-lg" href="http://localhost:8080/Project-1/users" role="button">View All Employees</a>
+
+        <div class="reimbsContainer"></div>
         <input name="reimId" type="reimId" class="form-control" id="reimId"
             placeholder="Please Enter Reimbursement Number">
         <br>
 
-        <input required name="status" type="radio" aria-label="Checkbox for following text input" value="1"
+        <input required name="radio" type="radio" aria-label="Checkbox for following text input" value="2"
             class="radio-group" id="approved">
         <label class="form-check-label" for="defaultCheck1">APPROVE</label><br>
-        <input name="status" type="radio" aria-label="Checkbox for following text input" value="2" class="radio-group"
+        <input name="radio" type="radio" aria-label="Checkbox for following text input" value="3" class="radio-group"
             id="denied">
         <label class="form-check-label" for="defaultCheck1">DENY</label><br><br>
         <a id="resolve" class="btn btn-success btn-lg" href="#" role="button">Update Reimbursement Request</a>
-
         </p>
     </div>
+    <div class="updateSuccess"></div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>

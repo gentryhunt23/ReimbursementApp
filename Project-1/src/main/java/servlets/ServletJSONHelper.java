@@ -31,7 +31,7 @@ public class ServletJSONHelper {
 				ReimbursementController.handleReimbursements(req, res);
 				//SessionController.getSession(req, res);
 				break;
-			case "/Project-1/api/manager/view-pending":
+			case "/Project-1/api/manager/view/pending":
 				ReimbursementController.viewPending(req, res);
 				//SessionController.getSession(req, res);
 				break;
@@ -43,6 +43,19 @@ public class ServletJSONHelper {
 				ReimbursementController.viewResolved(req, res);
 				//SessionController.getSession(req, res);
 				break;
+			case "/Project-1/api/users":
+				LoginController.viewAllUsers(req, res);
+				//SessionController.getSession(req, res);
+				break;
+			case "/Project-1/api/users/reimbursements":
+				ReimbursementController.viewReimFromAuthor(req, res);
+				//SessionController.getSession(req, res);
+				break;
+			case "/Project-1/api/user/register":
+				LoginController.register(req, res);
+				//SessionController.getSession(req, res);
+				break;
+				
 		}
 	}
 }

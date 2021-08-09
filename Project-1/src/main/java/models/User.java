@@ -47,7 +47,7 @@ import util.HibernateUtil;
 		private String password;
 
 		
-		@Column(name="email", unique=true, nullable=false)
+		@Column(name="email", nullable=false)
 		private String email;
 		
 		

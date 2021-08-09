@@ -64,6 +64,16 @@ public class ReimbursementDao {
 		query.setParameter("status", new Status(1, "PENDING"));
 		return query.list();
 	}
+	public List<Reimbursement> selectReimFromAuthor(int rAuthor) {
+		Session ses = HibernateUtil.getSession();
+		String sql = "SELECT * FROM reimburesment WHERE reim_author =:reim_author";
+		SQLQuery query = HibernateUtil.getSession().createSQLQuery(sql);
+		query.addEntity(Reimbursement.class);
+		query.setParameter("reim_author", rAuthor);
+		return query.list();
+	}
+	
+	
 	//                        reimbID and StatusID User curUser
 	public void updateStatus(int id, int statusId) {
 		Reimbursement selected = selectById(id);

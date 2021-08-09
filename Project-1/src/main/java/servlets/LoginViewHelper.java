@@ -17,6 +17,10 @@ public class LoginViewHelper {
 			return LoginViewController.fetchManagerPage(req);
 		case "/Project-1/employee" :
 			return LoginViewController.fetchEmployeePage(req);
+		case "/Project-1/users" :
+			return LoginViewController.fetchUsersPage(req);
+		case "/Project-1/register" :
+			return LoginViewController.fetchRegistrationPage(req);
 			default : System.out.println("something is broken");
 			return "This is the switchs case return statement in the view helper";
 				

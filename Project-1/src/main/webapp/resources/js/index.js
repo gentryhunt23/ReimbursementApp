@@ -36,11 +36,13 @@ $(document).ready(function () {
         }
         else {
             let res = await req.json();
+            console.log(res.uRole.userRole)
+            
 
-            if (res.userRole === 1) {
-                alert("HERE");
+             if (res.uRole.userRole === "EMPLOYEE") {
+            //     alert("HERE");
 
-                location.href = '/Project-1/manager';
+                location.href = '/Project-1/employee';
             } else {
                 location.href = '/Project-1/manager';
             }
